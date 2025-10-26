@@ -3,28 +3,33 @@
 import { ReactNode } from "react";
 
 interface TableProps {
-  headers: string[];
-  children: ReactNode;
+  columns: { header: string; accessor: string; className?: string }[];
+  renderRow: (item: any) => ReactNode;
+  data: any[];
 }
 
-const Table = ({ headers, children }: TableProps) => {
+const Table = ({ columns, renderRow, data }: TableProps) => {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
-            {headers.map((header, index) => (
+            {columns.map((col) => (
               <th
-                key={index}
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                key={col.accessor}
+                className={`px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${col.className || ""}`}
               >
-                {header}
+                {col.header}
               </th>
             ))}
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {children}
+          {data.map((item, index) => (
+            <tr key={index} className="hover:bg-gray-50">
+              {renderRow(item)}
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

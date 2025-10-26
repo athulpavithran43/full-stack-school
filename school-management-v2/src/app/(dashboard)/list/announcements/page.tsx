@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import Table from "@/components/Table";
 import Link from "next/link";
 import { formatDate } from "@/lib/utils";
@@ -27,16 +27,16 @@ export default async function AnnouncementsPage() {
 
       <div className="bg-white rounded-lg shadow-sm border border-gray-200">
         <Table
-          headers={[
-            "Title",
-            "Description",
-            "Date",
-            "Class",
-            "Actions",
+          columns={[
+            { header: "Title", accessor: "title" },
+            { header: "Description", accessor: "description" },
+            { header: "Date", accessor: "date" },
+            { header: "Class", accessor: "class" },
+            { header: "Actions", accessor: "actions" },
           ]}
-        >
-          {announcements.map((announcement) => (
-            <tr key={announcement.id} className="hover:bg-gray-50">
+          data={announcements}
+          renderRow={(announcement) => (
+            <>
               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                 {announcement.title}
               </td>
@@ -59,9 +59,9 @@ export default async function AnnouncementsPage() {
                   </button>
                 </div>
               </td>
-            </tr>
-          ))}
-        </Table>
+            </>
+          )}
+        />
       </div>
     </div>
   );
