@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import VoiceRecorder from "./VoiceRecorder";
+import { toast } from "react-toastify";
 
 const TableSearch = () => {
   const router = useRouter();
@@ -16,6 +18,16 @@ const TableSearch = () => {
     router.push(`${window.location.pathname}?${params}`);
   };
 
+  const handleVoiceResult = (text: string) => {
+    const input = document.querySelector<HTMLInputElement>("input[type='text']");
+    if (input) {
+      input.value = text;
+      const params = new URLSearchParams(window.location.search);
+      params.set("search", text);
+      router.push(`${window.location.pathname}?${params}`);
+    }
+  };
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -26,6 +38,14 @@ const TableSearch = () => {
         type="text"
         placeholder="Search..."
         className="w-[200px] p-2 bg-transparent outline-none"
+      />
+      <VoiceRecorder
+        onResult={handleVoiceResult}
+        onError={(err) => toast(err)}
+        className="ml-1"
+        buttonClassName="px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 disabled:opacity-60"
+        lang="en"
+        autoStopMs={15000}
       />
     </form>
   );
