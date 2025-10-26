@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import InputField from "../InputField";
+import SpeechInputField from "../SpeechInputField";
 import { subjectSchema, SubjectSchema } from "@/lib/formValidationSchemas";
 import { createSubject, updateSubject } from "@/lib/actions";
 import { useFormState } from "react-dom";
@@ -63,12 +64,14 @@ const SubjectForm = ({
       </h1>
 
       <div className="flex justify-between flex-wrap gap-4">
-        <InputField
+        <SpeechInputField
           label="Subject name"
           name="name"
           defaultValue={data?.name}
           register={register}
           error={errors?.name}
+          enableSpeech={true}
+          speechPlaceholder="Speak the subject name"
         />
         {data && (
           <InputField

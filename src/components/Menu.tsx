@@ -90,6 +90,12 @@ const menuItems = [
         href: "/list/announcements",
         visible: ["admin", "teacher", "student", "parent"],
       },
+      {
+        icon: "/message.png",
+        label: "Speech Demo",
+        href: "/speech-demo",
+        visible: ["admin", "teacher", "student", "parent"],
+      },
     ],
   },
   {
