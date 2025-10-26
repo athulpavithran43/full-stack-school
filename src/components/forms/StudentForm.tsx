@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import InputField from "../InputField";
+import SpeechInputField from "../SpeechInputField";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
@@ -78,19 +79,23 @@ const StudentForm = ({
         Authentication Information
       </span>
       <div className="flex justify-between flex-wrap gap-4">
-        <InputField
+        <SpeechInputField
           label="Username"
           name="username"
           defaultValue={data?.username}
           register={register}
           error={errors?.username}
+          enableSpeech={true}
+          speechPlaceholder="Speak your username"
         />
-        <InputField
+        <SpeechInputField
           label="Email"
           name="email"
           defaultValue={data?.email}
           register={register}
           error={errors?.email}
+          enableSpeech={true}
+          speechPlaceholder="Speak your email address"
         />
         <InputField
           label="Password"
@@ -124,33 +129,41 @@ const StudentForm = ({
         }}
       </CldUploadWidget>
       <div className="flex justify-between flex-wrap gap-4">
-        <InputField
+        <SpeechInputField
           label="First Name"
           name="name"
           defaultValue={data?.name}
           register={register}
           error={errors.name}
+          enableSpeech={true}
+          speechPlaceholder="Speak your first name"
         />
-        <InputField
+        <SpeechInputField
           label="Last Name"
           name="surname"
           defaultValue={data?.surname}
           register={register}
           error={errors.surname}
+          enableSpeech={true}
+          speechPlaceholder="Speak your last name"
         />
-        <InputField
+        <SpeechInputField
           label="Phone"
           name="phone"
           defaultValue={data?.phone}
           register={register}
           error={errors.phone}
+          enableSpeech={true}
+          speechPlaceholder="Speak your phone number"
         />
-        <InputField
+        <SpeechInputField
           label="Address"
           name="address"
           defaultValue={data?.address}
           register={register}
           error={errors.address}
+          enableSpeech={true}
+          speechPlaceholder="Speak your address"
         />
         <InputField
           label="Blood Type"

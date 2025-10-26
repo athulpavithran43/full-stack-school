@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import InputField from "../InputField";
+import SpeechInputField from "../SpeechInputField";
 import {
   classSchema,
   ClassSchema,
@@ -73,12 +74,14 @@ const ClassForm = ({
       </h1>
 
       <div className="flex justify-between flex-wrap gap-4">
-        <InputField
+        <SpeechInputField
           label="Class name"
           name="name"
           defaultValue={data?.name}
           register={register}
           error={errors?.name}
+          enableSpeech={true}
+          speechPlaceholder="Speak the class name"
         />
         <InputField
           label="Capacity"
