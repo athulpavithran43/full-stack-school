@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import Table from "@/components/Table";
 import Link from "next/link";
 
@@ -25,18 +25,18 @@ export default async function StudentsPage() {
 
       <div className="bg-white rounded-lg shadow-sm border border-gray-200">
         <Table
-          headers={[
-            "Name",
-            "Class",
-            "Grade",
-            "Parent",
-            "Email",
-            "Phone",
-            "Actions",
+          columns={[
+            { header: "Name", accessor: "name" },
+            { header: "Class", accessor: "class" },
+            { header: "Grade", accessor: "grade" },
+            { header: "Parent", accessor: "parent" },
+            { header: "Email", accessor: "email" },
+            { header: "Phone", accessor: "phone" },
+            { header: "Actions", accessor: "actions" },
           ]}
-        >
-          {students.map((student) => (
-            <tr key={student.id} className="hover:bg-gray-50">
+          data={students}
+          renderRow={(student) => (
+            <>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center">
                   <div className="flex-shrink-0 h-10 w-10">
@@ -81,9 +81,9 @@ export default async function StudentsPage() {
                   </button>
                 </div>
               </td>
-            </tr>
-          ))}
-        </Table>
+            </>
+          )}
+        />
       </div>
     </div>
   );

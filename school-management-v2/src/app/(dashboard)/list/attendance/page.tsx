@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import Table from "@/components/Table";
 import { formatDate } from "@/lib/utils";
 
