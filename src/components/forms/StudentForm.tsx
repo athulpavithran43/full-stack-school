@@ -220,7 +220,7 @@ const StudentForm = ({
             {...register("gradeId")}
             defaultValue={data?.gradeId}
           >
-            {grades.map((grade: { id: number; level: number }) => (
+            {grades.map((grade: { id: string; level: number }) => (
               <option value={grade.id} key={grade.id}>
                 {grade.level}
               </option>
@@ -241,7 +241,7 @@ const StudentForm = ({
           >
             {classes.map(
               (classItem: {
-                id: number;
+                id: string;
                 name: string;
                 capacity: number;
                 _count: { students: number };

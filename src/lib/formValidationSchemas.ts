@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const subjectSchema = z.object({
-  id: z.coerce.number().optional(),
+  id: z.string().optional(),
   name: z.string().min(1, { message: "Subject name is required!" }),
   teachers: z.array(z.string()), //teacher ids
 });
@@ -9,11 +9,11 @@ export const subjectSchema = z.object({
 export type SubjectSchema = z.infer<typeof subjectSchema>;
 
 export const classSchema = z.object({
-  id: z.coerce.number().optional(),
+  id: z.string().optional(),
   name: z.string().min(1, { message: "Subject name is required!" }),
   capacity: z.coerce.number().min(1, { message: "Capacity name is required!" }),
-  gradeId: z.coerce.number().min(1, { message: "Grade name is required!" }),
-  supervisorId: z.coerce.string().optional(),
+  gradeId: z.string().min(1, { message: "Grade name is required!" }),
+  supervisorId: z.string().optional(),
 });
 
 export type ClassSchema = z.infer<typeof classSchema>;
@@ -71,19 +71,19 @@ export const studentSchema = z.object({
   bloodType: z.string().min(1, { message: "Blood Type is required!" }),
   birthday: z.coerce.date({ message: "Birthday is required!" }),
   sex: z.enum(["MALE", "FEMALE"], { message: "Sex is required!" }),
-  gradeId: z.coerce.number().min(1, { message: "Grade is required!" }),
-  classId: z.coerce.number().min(1, { message: "Class is required!" }),
+  gradeId: z.string().min(1, { message: "Grade is required!" }),
+  classId: z.string().min(1, { message: "Class is required!" }),
   parentId: z.string().min(1, { message: "Parent Id is required!" }),
 });
 
 export type StudentSchema = z.infer<typeof studentSchema>;
 
 export const examSchema = z.object({
-  id: z.coerce.number().optional(),
+  id: z.string().optional(),
   title: z.string().min(1, { message: "Title name is required!" }),
   startTime: z.coerce.date({ message: "Start time is required!" }),
   endTime: z.coerce.date({ message: "End time is required!" }),
-  lessonId: z.coerce.number({ message: "Lesson is required!" }),
+  lessonId: z.string().min(1, { message: "Lesson is required!" }),
 });
 
 export type ExamSchema = z.infer<typeof examSchema>;

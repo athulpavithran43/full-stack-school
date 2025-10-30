@@ -117,7 +117,7 @@ const TeacherListPage = async ({
           case "classId":
             query.lessons = {
               some: {
-                classId: parseInt(value),
+                classId: value,
               },
             };
             break;

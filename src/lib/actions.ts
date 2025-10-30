@@ -21,9 +21,7 @@ export const createSubject = async (
     await prisma.subject.create({
       data: {
         name: data.name,
-        teachers: {
-          connect: data.teachers.map((teacherId) => ({ id: teacherId })),
-        },
+        teacherIds: data.teachers,
       },
     });
 
@@ -46,9 +44,7 @@ export const updateSubject = async (
       },
       data: {
         name: data.name,
-        teachers: {
-          set: data.teachers.map((teacherId) => ({ id: teacherId })),
-        },
+        teacherIds: data.teachers,
       },
     });
 
@@ -68,7 +64,7 @@ export const deleteSubject = async (
   try {
     await prisma.subject.delete({
       where: {
-        id: parseInt(id),
+        id: id,
       },
     });
 
@@ -125,7 +121,7 @@ export const deleteClass = async (
   try {
     await prisma.class.delete({
       where: {
-        id: parseInt(id),
+        id: id,
       },
     });
 
@@ -163,11 +159,7 @@ export const createTeacher = async (
         bloodType: data.bloodType,
         sex: data.sex,
         birthday: data.birthday,
-        subjects: {
-          connect: data.subjects?.map((subjectId: string) => ({
-            id: parseInt(subjectId),
-          })),
-        },
+        subjectIds: data.subjects || [],
       },
     });
 
@@ -210,11 +202,7 @@ export const updateTeacher = async (
         bloodType: data.bloodType,
         sex: data.sex,
         birthday: data.birthday,
-        subjects: {
-          set: data.subjects?.map((subjectId: string) => ({
-            id: parseInt(subjectId),
-          })),
-        },
+        subjectIds: data.subjects || [],
       },
     });
     // revalidatePath("/list/teachers");
@@ -454,7 +442,7 @@ export const deleteExam = async (
   try {
     await prisma.exam.delete({
       where: {
-        id: parseInt(id),
+        id: id,
         // ...(role === "teacher" ? { lesson: { teacherId: userId! } } : {}),
       },
     });

@@ -1,17 +1,17 @@
 version: '3.8'
 
 services:
-  postgress:
-    image: postgres:15
-    container_name: postgres_db
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydb
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: school_management
     ports:
-      - '5432:5432'
+      - '27017:27017'
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mongodb_data:/data/db
     
   app:
     build: .
@@ -19,9 +19,9 @@ services:
     ports:
       - '3000:3000'
     environment:
-      - DATABASE_URL: postgresql://myuser:mypassword@[YOUR_SERVER_IP]:5432/mydb
+      - DATABASE_URL=mongodb://admin:password@mongodb:27017/school_management?authSource=admin
     depends_on:
-      - postgres
+      - mongodb
 
 volumes:
-  postgres_data:
+  mongodb_data:
