@@ -2,7 +2,7 @@ import Announcements from "@/components/Announcements";
 import BigCalendarContainer from "@/components/BigCalendarContainer";
 import { auth } from "@clerk/nextjs/server";
 
-const TeacherPage = () => {
+const TeacherPage = async () => {
   const { userId } = auth();
   return (
     <div className="flex-1 p-4 flex gap-4 flex-col xl:flex-row">

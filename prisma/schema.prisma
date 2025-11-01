@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model Admin {
@@ -22,7 +22,7 @@ model Student {
   address     String
   img         String?
   bloodType   String
-  sex         UserSex
+  sex         String
   createdAt   DateTime     @default(now())
   parentId    String
   parent      Parent       @relation(fields: [parentId], references: [id])
@@ -45,7 +45,7 @@ model Teacher {
   address   String
   img       String?
   bloodType String
-  sex       UserSex
+  sex       String
   createdAt DateTime  @default(now())
   subjects  Subject[]
   lessons   Lesson[]
@@ -98,7 +98,7 @@ model Subject {
 model Lesson {
   id        Int      @id @default(autoincrement())
   name      String
-  day       Day
+  day       String
   startTime DateTime
   endTime   DateTime
 
@@ -179,15 +179,3 @@ model Announcement {
   class   Class? @relation(fields: [classId], references: [id])
 }
 
-enum UserSex {
-  MALE
-  FEMALE
-}
-
-enum Day {
-  MONDAY
-  TUESDAY
-  WEDNESDAY
-  THURSDAY
-  FRIDAY
-}
